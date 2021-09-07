@@ -12,7 +12,7 @@
     
 
     <div id="login-area">
-        <h1 class="text-center">Welcome to <span class="bank">Pioneer Bank</span></h1>
+        <h1 class="text-center">Welcome to <span class="bank">Yish Bank</span></h1>
         <div class="items" >
             <h3>Login</h3>
             
@@ -37,7 +37,7 @@
          <div class="col-md-4">
            <div class="withdraw status">
             <h5>Withdraw</h5>
-            <h2>$00</h2>
+            <h2>$<span id="currentWithdraw">00</span></h2>
            </div>
         </div>
         <div class="col-md-4">
@@ -58,8 +58,8 @@
          <div class="col-md-6">
             <div class="submit-area">
                <h4>Withdraw</h4>
-               <input type="number" placeholder="$ amount you want to withdraw" class="form-control">
-               <button id="withdraw" class="btn">Deposit</button>
+               <input id="withdrawAmount" type="number" placeholder="$ amount you want to withdraw" class="form-control">
+               <button id="withdraw" class="btn">Withdraw</button>
             </div>
         </div>
      </div>
@@ -75,6 +75,7 @@
         
 
      })
+// deposit btn event handler
 
      const depositBtn = document.getElementById("addDeposit");
        depositBtn.addEventListener("click", function(){
@@ -88,6 +89,24 @@
 
 
        }) 
+//  withdraw btn event handler  
+        const withdrawBtn = document.getElementById("withdraw");
+        withdrawBtn.addEventListener("click", function(){
+            const totalWithdraw = getInputNumber("withdrawAmount");
+            
+            updateSpanText("currentWithdraw", totalWithdraw);
+            updateSpanText("balance", -1 * totalWithdraw)
+
+
+            document.getElementById("withdrawAmount").value = "";
+
+        })
+
+        function getInputNumber(id){
+            const withdrawMoney = document.getElementById(id).value;
+            const totalWithdraw = parseFloat(withdrawMoney);
+            return totalWithdraw; 
+        }
 
        function updateSpanText(id, depositNumber){
         const updateBalance = document.getElementById(id).innerText;
